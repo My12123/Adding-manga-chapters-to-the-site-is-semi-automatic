@@ -1,7 +1,6 @@
 # Adding-manga-chapters-to-the-site-is-semi-automatic
 Adding manga chapters to the site is semi-automatic, in the future it may be fully automatic.
 Добавление глав манги на сайт происходит полуавтоматически, в будущем оно может стать полностью автоматическим.
-Install python 3.10
 ### In Russian. На русском.
 Для автоматического архивирования множества глав манги и комиксов, установите python 3.10 и запустите 
 ```
