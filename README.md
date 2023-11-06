@@ -11,7 +11,7 @@ python Архивирование-глав-(Archiving-chapters).py -i
 Все зависимости установятся автоматически при запуски.
 ### In English.
 To automatically archive multiple chapters of manga and comics, run 
-``
+```
 python Archiving-chapters-(Archiving-chapters).py -i
 ``` 
 The -i argument specifies the path to the folder where there are many manga chapters collected each in a separate folder. 
