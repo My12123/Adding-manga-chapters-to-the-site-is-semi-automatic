@@ -7,12 +7,12 @@ Install python 3.10
 ```
 python Архивирование-глав-(Archiving-chapters).py -i
 ``` 
-Аргумент -i задаёт путь к паку где находятся много глав манги собранных каждый в отдельную папку. 
+Аргумент -i задаёт путь к папке где находятся много глав манги собранных каждый в отдельную папку. 
 Все зависимости установятся автоматически при запуски.
 ### In English.
 To automatically archive multiple chapters of manga and comics, run 
 ``
 python Archiving-chapters-(Archiving-chapters).py -i
 ``` 
-The -i argument sets the path to the folder where there are many manga chapters collected each in a separate folder.
+The -i argument specifies the path to the folder where there are many manga chapters collected each in a separate folder. 
 All dependencies will be installed automatically at startup.
