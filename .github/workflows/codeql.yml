@@ -11,8 +11,7 @@ on:
 
 jobs:
   analyze:
-    name: Analyze
- my_job:
+     my_job:
  name: deploy to staging
     runs-on: windows-2019
     timeout-minutes: ${{ (matrix.language == 'swift' && 120) || 360 }}
