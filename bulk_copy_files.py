@@ -7,7 +7,7 @@ import time
 source_file = "./000.png"
 
 # Путь к папке, в которой находятся каталоги для копирования
-destination_folder = "G:\Going To Bed With My Hater-translated"
+destination_folder = "G:\G"
 
 # Получение списка всех каталогов в папке назначения
 folders = [f.path for f in os.scandir(destination_folder) if f.is_dir()]
