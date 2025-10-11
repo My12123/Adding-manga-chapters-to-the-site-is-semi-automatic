@@ -100,4 +100,3 @@ if __name__ == "__main__":
     
 
     process_images(args.input, args.fps, args.duration)
-
