@@ -59,7 +59,6 @@ def process_images(input_path, fps=30, duration=10):
         # Папка с изображениями
         image_extensions = ['.jpg', '.jpeg', '.png', '.bmp', '.tiff', '.webp']
         image_files = []
-        
         # Собираем все изображения из папки и подпапок
         for ext in image_extensions:
             image_files.extend(input_path.rglob(f'*{ext}'))
@@ -68,8 +67,7 @@ def process_images(input_path, fps=30, duration=10):
         if not image_files:
             print(f"В папке {input_path} не найдено изображений!")
             return
-        
-        print(f"Найдено {len(image_files)} изображений для обработки...")
+                print(f"Найдено {len(image_files)} изображений для обработки...")
         # Обрабатываем каждое изображение
         success_count = 0
         for image_file in image_files:
@@ -89,14 +87,10 @@ if __name__ == "__main__":
                        help='Частота кадров (по умолчанию: 30)')
     parser.add_argument('--duration', type=int, default=10,
                        help='Длительность видео в секундах (по умолчанию: 10)')
-    
-    args = parser.parse_args()
-
+        args = parser.parse_args()
     print("=== Конвертер изображений в видео ===")
     print(f"Входной путь: {args.input}")
     print(f"Частота кадров: {args.fps} FPS")
     print(f"Длительность видео: {args.duration} секунд")
     print("=" * 40)
-    
-
     process_images(args.input, args.fps, args.duration)
