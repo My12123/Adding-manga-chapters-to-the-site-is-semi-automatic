@@ -47,7 +47,6 @@ def create_video_from_image(image_path, fps=30, duration=10):
 def process_images(input_path, fps=30, duration=10):
     """Обрабатывает все изображения по указанному пути"""
     input_path = Path(input_path)
-    
     # Определяем, что обрабатывать: файл или папку
     if input_path.is_file():
         # Один файл
@@ -101,3 +100,4 @@ if __name__ == "__main__":
     
 
     process_images(args.input, args.fps, args.duration)
+
