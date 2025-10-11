@@ -71,7 +71,6 @@ def process_images(input_path, fps=30, duration=10):
             return
         
         print(f"Найдено {len(image_files)} изображений для обработки...")
-        
         # Обрабатываем каждое изображение
         success_count = 0
         for image_file in image_files:
@@ -100,4 +99,5 @@ if __name__ == "__main__":
     print(f"Длительность видео: {args.duration} секунд")
     print("=" * 40)
     
+
     process_images(args.input, args.fps, args.duration)
