@@ -8,8 +8,7 @@ def rename_files(input_path):
     if not os.path.exists(input_path):
         print(f"Ошибка: путь {input_path} не существует")
         return
-    
-    if not os.path.isdir(input_path):
+        if not os.path.isdir(input_path):
         print(f"Ошибка: {input_path} не является директорией")
         return
 
