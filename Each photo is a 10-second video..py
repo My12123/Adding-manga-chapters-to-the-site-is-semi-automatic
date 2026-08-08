@@ -1,10 +1,11 @@
 import argparse
 import os
-import cv2
 from pathlib import Path
 
 def create_video_from_image(image_path, fps=30, duration=10):
     """Создает видео из одного изображения"""
+    import cv2
+
     try:
         # Загружаем изображение
         img = cv2.imread(image_path)
@@ -13,7 +14,10 @@ def create_video_from_image(image_path, fps=30, duration=10):
             return False
 
         # Получаем размеры изображения
-        height, width, _ = img.shape
+        if img.ndim == 2:
+            height, width = img.shape
+        else:
+            height, width, _ = img.shape
 
         # Формируем имя выходного файла
         name_without_ext = os.path.splitext(image_path)[0]
@@ -27,6 +31,9 @@ def create_video_from_image(image_path, fps=30, duration=10):
             fps,
             (width, height)
         )
+        if not video_writer.isOpened():
+            print(f"[ERR] Не удалось создать видео для {image_path}")
+            return False
 
         # Рассчитываем количество кадров
         total_frames = fps * duration
@@ -37,11 +44,11 @@ def create_video_from_image(image_path, fps=30, duration=10):
 
         # Освобождаем ресурсы
         video_writer.release()
-        print(f"✓ Видео создано: {output_path}")
+        print(f"[OK] Видео создано: {output_path}")
         return True
         
     except Exception as e:
-        print(f"✗ Ошибка при обработке {image_path}: {e}")
+        print(f"[ERR] Ошибка при обработке {image_path}: {e}")
         return False
 
 def process_images(input_path, fps=30, duration=10):
@@ -58,16 +65,17 @@ def process_images(input_path, fps=30, duration=10):
     elif input_path.is_dir():
         # Папка с изображениями
         image_extensions = ['.jpg', '.jpeg', '.png', '.bmp', '.tiff', '.webp']
-        image_files = []
-        # Собираем все изображения из папки и подпапок
-        for ext in image_extensions:
-            image_files.extend(input_path.rglob(f'*{ext}'))
-            image_files.extend(input_path.rglob(f'*{ext.upper()}'))
-        
+        # Собираем все изображения из папки и подпапок (без учёта регистра расширения)
+        image_files = [
+            p for p in input_path.rglob('*')
+            if p.is_file() and p.suffix.lower() in image_extensions
+        ]
+
         if not image_files:
             print(f"В папке {input_path} не найдено изображений!")
             return
-                print(f"Найдено {len(image_files)} изображений для обработки...")
+
+        print(f"Найдено {len(image_files)} изображений для обработки...")
         # Обрабатываем каждое изображение
         success_count = 0
         for image_file in image_files:
@@ -80,14 +88,29 @@ def process_images(input_path, fps=30, duration=10):
         print(f"Ошибка: Путь {input_path} не существует!")
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Пакетное создание видео из изображений')
+    epilog = """ИНСТРУКЦИЯ:
+  Скрипт создаёт видео из одного изображения или из всех изображений
+  (jpg, jpeg, png, bmp, tiff, webp) в папке и её подпапках.
+
+Примеры:
+  python "Each photo is a 10-second video..py" -i "C:\\photo.jpg"
+  python "Each photo is a 10-second video..py" -i "C:\\папка\\с фото" --fps 24 --duration 5
+
+Примечания:
+  - Видео создаётся рядом с исходным изображением (расширение .mp4).
+  - Изображение просто повторяется в течение заданной длительности.
+"""
+    parser = argparse.ArgumentParser(
+        description='Пакетное создание видео из изображений',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=epilog)
     parser.add_argument('-i', '--input', required=True, 
                        help='Путь к изображению или папке с изображениями')
     parser.add_argument('--fps', type=int, default=30,
                        help='Частота кадров (по умолчанию: 30)')
     parser.add_argument('--duration', type=int, default=10,
                        help='Длительность видео в секундах (по умолчанию: 10)')
-        args = parser.parse_args()
+    args = parser.parse_args()
     print("=== Конвертер изображений в видео ===")
     print(f"Входной путь: {args.input}")
     print(f"Частота кадров: {args.fps} FPS")

@@ -8,7 +8,8 @@ def rename_files(input_path):
     if not os.path.exists(input_path):
         print(f"Ошибка: путь {input_path} не существует")
         return
-        if not os.path.isdir(input_path):
+
+    if not os.path.isdir(input_path):
         print(f"Ошибка: {input_path} не является директорией")
         return
 
@@ -56,8 +57,23 @@ def rename_files(input_path):
     print(f"Переименовано файлов: {files_renamed}")
 
 if __name__ == "__main__":
+    epilog = """ИНСТРУКЦИЯ:
+  Скрипт переименовывает файлы в указанной папке, удаляя один пробел
+  и/или один символ '0' в конце названия (без расширения).
+
+Примеры:
+  python "from i (704) 0 to i (704).py" -i "C:\\фото\\главы"
+  python "from i (704) 0 to i (704).py" -i "C:\\путь с пробелами\\папка"
+
+Примечания:
+  - 'название 0.jpg' -> 'название.jpg', 'название0.jpg' -> 'название.jpg'.
+  - Файл с уже существующим новым именем пропускается.
+  - Переименование происходит только в указанной папке (без подпапок).
+"""
     parser = argparse.ArgumentParser(
-        description='Удаление одного пробела и одного нуля в конце названий фотографий'
+        description='Удаление одного пробела и одного нуля в конце названий фотографий',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=epilog
     )
     parser.add_argument(
         '-i', '--input', 
