@@ -12,7 +12,8 @@ python Архивирование-глав-(Archiving-chapters).py -i
 Install python 3.10
 To automatically archive multiple chapters of manga and comics, run 
 ```
-python Archiving-chapters-(Archiving-chapters).py -i 
-``` 
+python "Архивирование-глав-(Archiving-chapters).py" -i 
+```
+Or use `Installer for Windows CPU.bat`, which creates a virtual environment, installs all dependencies and runs the program automatically.
 The -i argument specifies the path to the folder where there are many manga chapters collected each in a separate folder. 
 All dependencies will be installed automatically at startup.
