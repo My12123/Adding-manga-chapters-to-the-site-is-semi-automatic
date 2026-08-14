@@ -14,6 +14,7 @@ SCRIPTS = [
     "bulk_copy_files.py",
     "Each photo is a 10-second video..py",
     "from i (704) 0 to i (704).py",
+    "smart_resize_manga.py",
     "requirements.txt",
 ]
 
@@ -71,6 +72,7 @@ def main():
         "--noconfirm",
         "--name", NAME,
         "--collect-all", "cv2",
+        "--collect-submodules", "PIL",
         "--hidden-import", "numpy",
         "--hidden-import", "tqdm",
     ]
